@@ -1,12 +1,17 @@
-import "./App.css";
-
 /* 전체 배경 디자인 */
+/* App.css 맨 윗부분 수정 */
 #root {
   background-color: #f9f0f6;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  padding: 50px;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0; /* 브라우저 기본 여백 제거 */
 }
 
 /* 투두 리스트 박스 */
@@ -41,4 +46,22 @@ import "./App.css";
   color: #888;
   font-size: 13px;
   margin-top: 5px;
+}
+/* 우선순위별 색상 스타일 - 클래스 이름은 대문자여야 합니다! */
+.todo-item.HIGH .priority {
+  color: #ff4d4d;
+} /* 빨강 */
+.todo-item.MEDIUM .priority {
+  color: #ffa500;
+} /* 주황 */
+.todo-item.LOW .priority {
+  color: #4caf50;
+} /* 초록 */
+
+/* 기본 보라색이 나오는 부분을 덮어씁니다 */
+.priority {
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 10px;
+  /* color: #a366ff; 이 줄이 있다면 지우거나 위 색상들이 우선하도록 하세요 */
 }

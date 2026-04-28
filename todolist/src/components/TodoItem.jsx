@@ -1,6 +1,6 @@
 function TodoItem({ text, priority, createdAt }) {
   return (
-    /* priority 값(HIGH, MEDIUM, LOW)을 클래스 이름에 추가해서 색상을 구분합니다 */
+    /* {priority}가 추가 -> HIGH는 빨강, LOW는 초록 */
     <li className={`todo-item ${priority}`}>
       <div className="todo-info">
         <span className="priority">[{priority}]</span>
