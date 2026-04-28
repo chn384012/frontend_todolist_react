@@ -1,3 +1,5 @@
+import "./App.css";
+
 /* 전체 배경 디자인 */
 #root {
   background-color: #f9f0f6;
