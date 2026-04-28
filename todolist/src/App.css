@@ -1,4 +1,4 @@
-/* 1. 브라우저의 기본 여백을 완전히 제거 */
+/* 브라우저의 기본 여백을 완전히 제거 */
 html,
 body {
   margin: 0;
@@ -7,7 +7,7 @@ body {
   height: 100%;
 }
 
-/* 2. 배경색이 화면 전체를 덮도록 설정합 */
+/* 배경색이 화면 전체를 덮도록 설정함 */
 #root {
   background-color: #f9f0f6; /* 분홍색 배경 */
   width: 100vw; /* 화면 너비 100% */
@@ -28,13 +28,37 @@ body {
   width: 400px;
 }
 
-/* 개별 아이템 디자인 */
+/* 리스트 전체의 왼쪽 치우침 방지 */
+ul {
+  list-style: none;
+  padding: 0; /* 브라우저 기본 왼쪽 여백 40px 제거 */
+  margin: 0;
+  width: 100%; /* 부모 박스 너비에 맞춤 */
+}
+
+/* 개별 아이템 디자인 (수정) */
 .todo-item {
   list-style: none;
   border-bottom: 1px solid #eee;
   padding: 15px 0;
   display: flex;
   flex-direction: column;
+  align-items: center; /* 내부 글자들을 가로 중앙으로 정렬 */
+  width: 100%; /* 가로 선이 양끝까지 가도록 설정 */
+}
+
+/* 텍스트와 우선순위 정렬 (추가 또는 수정) */
+.todo-info {
+  display: flex;
+  justify-content: center; /* [HIGH]와 글자를 가로 중앙에 모음 */
+  align-items: center;
+  gap: 8px; /* 간격 조절 */
+  width: 100%;
+}
+
+/* 마지막 아이템 선 제거 (선택 사항) */
+.todo-item:last-child {
+  border-bottom: none;
 }
 
 .priority {
@@ -52,6 +76,7 @@ body {
   font-size: 13px;
   margin-top: 5px;
 }
+
 /* 우선순위별 색상 스타일 - 클래스 이름은 대문자 */
 .todo-item.HIGH .priority {
   color: #ff4d4d;
