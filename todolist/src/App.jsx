@@ -1,3 +1,5 @@
+import "./App.css";
+
 import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
 import { todos } from "./data/todos";
