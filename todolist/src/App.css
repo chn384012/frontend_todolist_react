@@ -95,3 +95,22 @@ ul {
   margin-right: 10px;
   /* color: #a366ff; 이 줄이 있다면 지우거나 위 색상들이 우선 */
 }
+
+/* 5.9일 7주차 과제 때 추가 */
+.todo-item {
+  cursor: pointer; /* 마우스 올리면 클릭 가능 표시 */
+  transition: 0.2s;
+}
+
+.todo-item.done {
+  opacity: 0.5; /* 완료된 건 흐릿하게 */
+}
+
+.completed {
+  text-decoration: line-through; /* 취소선 [cite: 857] */
+  color: #888;
+}
+
+.status-icon {
+  margin-right: 10px;
+}
