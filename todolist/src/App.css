@@ -64,18 +64,18 @@ ul {
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding-left: 20px; /* 왼쪽 여백을 주어 글자 시작점을 맞춥니다 */
+  padding-left: 20px; /* 왼쪽 여백을 주어 글자 시작점을 맞춤 */
   box-sizing: border-box;
 }
 
 .priority {
-  width: 70px; /* 우선순위 글자 영역 너비를 고정하면 뒤의 글자 시작점이 딱 맞습니다! */
+  width: 70px; /* 우선순위 글자 영역 너비를 고정-> 뒤의 글자 시작점 맞춤 */
   text-align: left;
   font-weight: bold;
 }
 
 .text {
-  flex: 1; /* 남은 공간을 꽉 채워 정렬을 유지합니다 */
+  flex: 1; /* 남은 공간을 꽉 채워 정렬을 유지 */
   text-align: left;
 }
 

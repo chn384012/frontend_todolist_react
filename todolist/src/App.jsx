@@ -44,7 +44,7 @@ function App() {
     // 기존 todos 배열 앞에 새 항목 추가 (불변성 유지)
     setTodos([nextTodo, ...todos]);
 
-    // 3-4. [선택 구현] input 값 비우기
+    // input 값 비우기
     setInputValue("");
 
     // 다음 항목을 위해 id 1 증가

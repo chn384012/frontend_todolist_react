@@ -1,7 +1,7 @@
 // src/components/TodoList.jsx
 import TodoItem from "./TodoItem";
 
-// onToggle 함수를 props로 추가로 받습니다.
+// onToggle 함수를 props로 추가로 받음
 function TodoList({ sectionTitle, todos, onToggle }) {
   return (
     <section className="todo-list">
