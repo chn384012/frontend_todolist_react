@@ -66,10 +66,9 @@ function App() {
         <input
           type="text"
           value={inputValue}
-          // input 값을 state로 관리
-          onChange={(e) => setInputValue(e.target.target.value)}
-          onKeyDown={onKeyDown} // 엔터키 지원
-          placeholder="오늘 할 일을 입력하고 Enter를 누르세요"
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={onKeyDown}
+          placeholder="할 일을 입력하세요"
         />
         <button onClick={onInsert}>추가</button>
       </div>

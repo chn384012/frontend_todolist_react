@@ -1,3 +1,10 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+/* 모든 요소에 폰트를 강제 적용 */
+* {
+  font-family: "Pretendard", sans-serif !important;
+}
+
 /* 브라우저의 기본 여백을 완전히 제거 */
 html,
 body {
@@ -5,12 +12,6 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-}
-
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-
-* {
-  font-family: "Pretendard", sans-serif; /* 폰트 변경 */
 }
 
 /* 배경색이 화면 전체를 덮도록 설정함 */
@@ -53,28 +54,29 @@ ul {
   width: 100%; /* 가로 선이 양끝까지 가도록 설정 */
 }
 
-/* 텍스트와 우선순위 정렬 (추가 또는 수정) */
-.todo-info {
-  display: flex;
-  justify-content: center; /* [HIGH]와 글자를 가로 중앙에 모음 */
-  align-items: center;
-  gap: 8px; /* 간격 조절 */
-  width: 100%;
-}
-
 /* 마지막 아이템 선 제거 (선택 사항) */
 .todo-item:last-child {
   border-bottom: none;
 }
 
+.todo-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding-left: 20px; /* 왼쪽 여백을 주어 글자 시작점을 맞춥니다 */
+  box-sizing: border-box;
+}
+
 .priority {
-  color: #a366ff;
+  width: 70px; /* 우선순위 글자 영역 너비를 고정하면 뒤의 글자 시작점이 딱 맞습니다! */
+  text-align: left;
   font-weight: bold;
-  margin-right: 8px;
 }
 
 .text {
-  font-size: 16px;
+  flex: 1; /* 남은 공간을 꽉 채워 정렬을 유지합니다 */
+  text-align: left;
 }
 
 /* 우선순위별 색상 스타일 - 클래스 이름은 대문자 */
