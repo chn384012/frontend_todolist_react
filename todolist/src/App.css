@@ -7,6 +7,12 @@ body {
   height: 100%;
 }
 
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+  font-family: "Pretendard", sans-serif; /* 폰트 변경 */
+}
+
 /* 배경색이 화면 전체를 덮도록 설정함 */
 #root {
   background-color: #f9f0f6; /* 분홍색 배경 */
@@ -71,12 +77,6 @@ ul {
   font-size: 16px;
 }
 
-.date {
-  color: #888;
-  font-size: 13px;
-  margin-top: 5px;
-}
-
 /* 우선순위별 색상 스타일 - 클래스 이름은 대문자 */
 .todo-item.HIGH .priority {
   color: #ff4d4d;
@@ -97,20 +97,58 @@ ul {
 }
 
 /* 5.9일 7주차 과제 때 추가 */
+
 .todo-item {
-  cursor: pointer; /* 마우스 올리면 클릭 가능 표시 */
+  list-style: none;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 중앙 정렬 */
+  width: 100%;
+  cursor: pointer; /* 클릭 가능 표시 */
   transition: 0.2s;
 }
 
+/* 완료(done) 상태일 때 스타일 */
 .todo-item.done {
-  opacity: 0.5; /* 완료된 건 흐릿하게 */
+  opacity: 0.5; /* 흐릿하게 */
+  background-color: #f9f9f9;
 }
 
+/* 완료 시 취소선 */
 .completed {
-  text-decoration: line-through; /* 취소선 [cite: 857] */
+  text-decoration: line-through;
   color: #888;
 }
 
 .status-icon {
   margin-right: 10px;
+}
+
+/* 할 일 추가 입력창 디자인 */
+.todo-insert {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.todo-insert input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.todo-insert button {
+  padding: 12px 20px;
+  background-color: #a366ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }

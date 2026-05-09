@@ -1,6 +1,8 @@
+// src/components/TodoList.jsx
 import TodoItem from "./TodoItem";
 
-function TodoList({ sectionTitle, todos }) {
+// onToggle 함수를 props로 추가로 받습니다.
+function TodoList({ sectionTitle, todos, onToggle }) {
   return (
     <section className="todo-list">
       <h2>{sectionTitle}</h2>
@@ -8,9 +10,8 @@ function TodoList({ sectionTitle, todos }) {
         {todos.map((todo) => (
           <TodoItem
             key={todo.id}
-            text={todo.text}
-            priority={todo.priority}
-            createdAt={todo.createdAt}
+            {...todo}
+            onToggle={onToggle} // TodoItem에 함수 전달
           />
         ))}
       </ul>
