@@ -34,7 +34,7 @@ function TodosPage({ todos, onAddTodo, onTodoClick }) {
   return (
     <>
       {/* 새 Todo를 입력하고 추가하는 영역입니다. */}
-      <form className="todo-form" onSubmit={handleAddTodo}>
+      <form className="todo-insert" onSubmit={handleAddTodo}>
         <input
           type="text"
           value={todoText}
@@ -48,7 +48,7 @@ function TodosPage({ todos, onAddTodo, onTodoClick }) {
       <TodoList
         sectionTitle="전체 할 일"
         todos={todos}
-        onTodoClick={onTodoClick}
+        onToggle={onTodoClick}
       />
     </>
   );

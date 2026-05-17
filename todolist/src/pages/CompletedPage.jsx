@@ -6,7 +6,7 @@ function CompletedPage({ todos, onTodoClick }) {
     <TodoList
       sectionTitle="완료된 할 일"
       todos={completedTodos}
-      onTodoClick={onTodoClick}
+      onToggle={onTodoClick}
     />
   );
 }
