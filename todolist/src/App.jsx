@@ -1,21 +1,37 @@
 // src/App.jsx
-import { useState, useRef } from "react"; // useRef는 ID 관리용
+import { useState, useEffect, useRef } from "react";
 import { initialTodos } from "./data/todos";
 import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
 import "./App.css";
 
 function App() {
-  // 데이터를 state로 관리 (Vite 서버 실행 시 초기값)
-  const [todos, setTodos] = useState(initialTodos);
+  // [필수 구현 2] 페이지 최초 실행 시 localStorage에 저장된 데이터가 있으면 불러와서 초기값으로 사용
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos");
+    return savedTodos ? JSON.parse(savedTodos) : initialTodos;
+  });
 
-  // input창의 입력을 관리할 state
+  // [필수 구현 1] input에 입력한 값을 state로 관리
   const [inputValue, setInputValue] = useState("");
 
-  // 새로운 Todo의 id를 위한 ref (초기값 5, 데이터가 추가될 때마다 1씩 증가)
-  const nextId = useRef(5);
+  // 새로운 Todo의 고유 ID 관리를 위한 ref
+  const nextId = useRef(
+    todos.length > 0 ? Math.max(...todos.map((t) => t.id)) + 1 : 1,
+  );
 
-  // 클릭 시 'done' 토글 함수
+  // [필수 구현 2] useEffect를 사용해 todos가 변경될 때만 localStorage에 저장하고 콘솔 로그 남기기
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+
+    // todos가 실제로 변경될 때만 실행되는지 확인하기 위한 콘솔 로그
+    console.log(
+      "localStorage 저장 코드 실행:",
+      new Date().toLocaleTimeString(),
+    );
+  }, [todos]); // dependency 배열에 todos를 넣어 변경 시에만 실행 제어
+
+  // 완료 토글 함수
   const onToggle = (id) => {
     setTodos(
       todos.map((todo) =>
@@ -24,60 +40,58 @@ function App() {
     );
   };
 
-  // 새로운 할 일 추가 함수
+  // [필수 구현 1] 추가 버튼 클릭 시 새로운 Todo를 리스트에 추가
   const onInsert = () => {
-    // 빈 값 방지 처리
+    // 구현 조건: 빈 값은 추가되지 않도록 처리 (공백 제거 후 검사)
     if (!inputValue.trim()) {
       alert("할 일을 입력해주세요!");
       return;
     }
 
-    // 추가할 데이터 객체 생성
     const nextTodo = {
       id: nextId.current,
       text: inputValue,
-      priority: "MEDIUM", // 기본 우선순위
-      createdAt: new Date().toLocaleDateString(), // 오늘 날짜
-      done: false, // 초기 상태는 미완료
+      priority: "MEDIUM",
+      done: false,
     };
 
-    // 기존 todos 배열 앞에 새 항목 추가 (불변성 유지)
     setTodos([nextTodo, ...todos]);
 
-    // input 값 비우기
+    // 구현 조건: 추가 후 input 값 비우기
     setInputValue("");
-
-    // 다음 항목을 위해 id 1 증가
     nextId.current += 1;
   };
 
-  // 엔터키로도 추가 가능하게 하는 함수
+  // 엔터키 입력 시에도 추가 기능 작동
   const onKeyDown = (e) => {
     if (e.key === "Enter") {
       onInsert();
     }
   };
 
+  // input 입력 시 실행되는 함수 (렌더링 확인용 콘솔 로그 포함)
+  const onInputChange = (e) => {
+    setInputValue(e.target.value);
+    console.log("현재 입력 중... (렌더링 발생)");
+  };
+
   return (
     <div className="container">
       <TodoHeader title="My Todo List" />
 
+      {/* 할 일 추가 기능 UI 영역 */}
       <div className="todo-insert">
         <input
           type="text"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={onInputChange}
           onKeyDown={onKeyDown}
           placeholder="할 일을 입력하세요"
         />
         <button onClick={onInsert}>추가</button>
       </div>
 
-      <TodoList
-        sectionTitle="할 일 목록"
-        todos={todos}
-        onToggle={onToggle} // 토글 함수 전달
-      />
+      <TodoList sectionTitle="할 일 목록" todos={todos} onToggle={onToggle} />
     </div>
   );
 }
