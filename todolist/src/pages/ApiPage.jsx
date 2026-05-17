@@ -2,33 +2,61 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function ApiPage() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // 로딩 상태 관리
+  const [isError, setIsError] = useState(false); // 에러 상태 관리
+  const [posts, setPosts] = useState([]); //성공한 데이터를 담을 배열 state 추가
+
   useEffect(() => {
     const tryApiRequest = async () => {
       try {
-        // 일부러 존재하지 않는 API 주소로 요청해서 실패 흐름을 확인합니다.
-        await axios.get("https://example.invalid/todos");
+        setIsError(false);
+        setIsLoading(true);
+
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts?_limit=5",
+        );
+
+        // 받아온 5개의 데이터
+        setPosts(response.data);
       } catch {
-        // 요청이 실패하면 실패 상태를 true로 바꿔 화면에 "실패"를 표시합니다.
+        // 요청 실패 시 에러 상태를 true로 변경
         setIsError(true);
       } finally {
-        // 요청이 끝나면 Loading... 표시를 종료합니다.
+        // 성공하든 실패하든 요청이 끝나면 로딩 표시를 종료
         setIsLoading(false);
       }
     };
     tryApiRequest();
   }, []);
 
+  // API 요청 중 Loading... 표시
   if (isLoading) {
-    return <section>Loading...</section>;
+    return <section className="api-status">Loading...</section>;
   }
+
+  // 요청 실패 시 에러 메시지 표시
   if (isError) {
-    return <section>실패</section>;
+    return (
+      <section className="api-status error">
+        데이터를 불러오는 데 실패했습니다.
+      </section>
+    );
   }
-  // API 성공 시에 뜰 문구
-  // 이번 실습에서는 가짜 API 주소이므로 성공 불가함!!
-  return <section>성공</section>;
+
+  // API 요청 성공 시 데이터 목록 출력하기
+  return (
+    <div className="api-page">
+      <h2>외부 API 데이터 목록</h2>
+      <ul className="post-list">
+        {posts.map((post) => (
+          <li key={post.id} className="post-item">
+            <strong>{post.title}</strong>
+            <p>{post.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default ApiPage;
